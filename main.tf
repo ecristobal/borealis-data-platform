@@ -37,7 +37,7 @@ resource "google_storage_bucket" "data-lake" {
   }
 
   encryption {
-    default_kms_key_name = google_kms_crypto_key.data-lake-sign-key.name
+    default_kms_key_name = google_kms_crypto_key.data-lake-sign-key.id
   }
 }
 
