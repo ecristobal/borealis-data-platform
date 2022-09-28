@@ -27,12 +27,15 @@ resource "google_storage_bucket" "data-lake" {
   location                    = "EUROPE-SOUTHWEST1"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
+
   versioning {
     enabled = true
   }
+
   logging {
     log_bucket = "borealis-data-lake-logging"
   }
+
   encryption {
     default_kms_key_name = google_kms_crypto_key.data-lake-sign-key.name
   }
@@ -47,6 +50,7 @@ resource "google_kms_crypto_key" "data-lake-sign-key" {
   name     = "data-lake-sign"
   key_ring = google_kms_key_ring.borealis-data-platform-keyring.id
   purpose  = "ASYMMETRIC_SIGN"
+  rotation_period = "7776000s" # 90 days
 
   version_template {
     algorithm = "EC_SIGN_P384_SHA384"
