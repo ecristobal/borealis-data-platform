@@ -56,6 +56,16 @@ resource "google_kms_crypto_key" "data-lake-sign-key" {
   }
 }
 
+data "google_storage_project_service_account" "gcs_account" {
+}
+
+resource "google_kms_crypto_key_iam_binding" "binding" {
+  crypto_key_id = google_kms_crypto_key.data-lake-sign-key.id
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  members = ["serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"]
+}
+
 data "google_storage_bucket" "default" {
   name = google_storage_bucket.data-lake.id
 }
