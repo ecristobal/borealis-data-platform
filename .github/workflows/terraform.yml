@@ -6,7 +6,8 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
+  security-events: write
 
 jobs:
   terraform:
