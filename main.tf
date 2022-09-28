@@ -42,7 +42,7 @@ resource "google_storage_bucket" "data-lake" {
 }
 
 resource "google_kms_key_ring" "data-platform-keyring" {
-  name     = "data-platform"
+  name     = "data-platform-keyring"
   location = "europe-southwest1"
 }
 
