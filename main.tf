@@ -49,12 +49,7 @@ resource "google_kms_key_ring" "data-platform-keyring" {
 resource "google_kms_crypto_key" "data-lake-sign-key" {
   name            = "data-lake-sign"
   key_ring        = google_kms_key_ring.data-platform-keyring.id
-  purpose         = "ASYMMETRIC_SIGN"
   rotation_period = "7776000s" # 90 days
-
-  version_template {
-    algorithm = "EC_SIGN_P384_SHA384"
-  }
 
   lifecycle {
     prevent_destroy = true
