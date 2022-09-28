@@ -31,13 +31,18 @@ jobs:
 
     - name: Terraform Format
       run: terraform fmt -check
-    
+
     - name: Run Snyk security test
       uses: snyk/actions/iac@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:          
-        file: main.tf
+      with:
+        file: .
+
+    - name: Upload result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: snyk.sarif
 
     - name: Terraform Plan
       run: terraform plan -input=false
