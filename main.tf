@@ -23,7 +23,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "data-lake" {
-  name                        = "borealis-data-lake"
+  name                        = "data-lake"
   location                    = "EUROPE-SOUTHWEST1"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
@@ -33,7 +33,7 @@ resource "google_storage_bucket" "data-lake" {
   }
 
   logging {
-    log_bucket = "borealis-data-lake-logging"
+    log_bucket = "data-lake-logging"
   }
 
   encryption {
@@ -41,14 +41,14 @@ resource "google_storage_bucket" "data-lake" {
   }
 }
 
-resource "google_kms_key_ring" "borealis-data-platform-keyring" {
-  name     = "borealis-data-platform"
+resource "google_kms_key_ring" "data-platform-keyring" {
+  name     = "data-platform"
   location = "europe-southwest1"
 }
 
 resource "google_kms_crypto_key" "data-lake-sign-key" {
   name            = "data-lake-sign"
-  key_ring        = google_kms_key_ring.borealis-data-platform-keyring.id
+  key_ring        = google_kms_key_ring.data-platform-keyring.id
   purpose         = "ASYMMETRIC_SIGN"
   rotation_period = "7776000s" # 90 days
 
