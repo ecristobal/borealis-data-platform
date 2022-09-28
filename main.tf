@@ -3,7 +3,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "3.5.0"
+      version = "4.38.0"
     }
   }
 
@@ -61,10 +61,10 @@ resource "google_kms_crypto_key" "data-lake-sign-key" {
   }
 }
 
-data "google_storage_bucket" "data-lake" {
+data "google_storage_bucket" "default" {
   name = google_storage_bucket.data-lake.id
 }
 
 output "bucket_metadata" {
-  value = data.google_storage_bucket.data-lake
+  value = data.google_storage_bucket.default
 }

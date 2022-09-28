@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Set-up Data Platform'
 
 on:
   push:
@@ -10,8 +10,8 @@ permissions:
   security-events: write
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  run-terraform:
+    name: 'Run Terraform scripts'
     runs-on: ubuntu-latest
 
     defaults:
