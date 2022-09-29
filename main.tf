@@ -67,7 +67,7 @@ resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
   members       = ["serviceAccount:${data.google_storage_project_service_account.data-lake-account.email_address}"]
 }
 
-resource "google_kms_crypto_key_ring_iam_binding" "terraform-binding" {
+resource "google_kms_key_ring_iam_binding" "terraform-binding" {
   key_ring_id = google_kms_key_ring.data-lake.id
   role        = "roles/cloudkms.admin"
   members     = ["serviceAccount:${data.google_service_account.terraform-account.email}"]
