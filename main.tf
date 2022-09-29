@@ -58,7 +58,7 @@ data "google_storage_project_service_account" "data-lake-account" {
 }
 
 data "google_service_account" "terraform-account" {
-  account_id = "Terraform Cloud"
+  account_id = "terraform-cloud"
 }
 
 resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
