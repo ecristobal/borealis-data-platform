@@ -44,7 +44,7 @@ resource "google_storage_bucket" "data-lake" {
 }
 
 resource "google_kms_key_ring" "data-lake" {
-  name     = "data-lake"
+  name     = "borealis-data-lake"
   location = "europe-southwest1"
 }
 
