@@ -8,16 +8,16 @@ terraform {
   }
 
   cloud {
-    organization = "borealis-infra"
+    organization = "borealis-infrastructure"
 
     workspaces {
-      name = "borealis-data-platform"
+      name = "borealis-gcp"
     }
   }
 }
 
 provider "google" {
-  project = "borealis-364019"
+  project = "borealis-364020"
   region  = "europe-southwest1"
   zone    = "europe-southwest1-a"
 }
