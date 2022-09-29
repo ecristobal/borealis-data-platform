@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "google" {
-  project = "borealis-363518"
+  project = "borealis-364019"
   region  = "europe-southwest1"
   zone    = "europe-southwest1-a"
 }
@@ -37,7 +37,7 @@ resource "google_storage_bucket" "data-lake" {
   }
 
   encryption {
-    default_kms_key_name = google_kms_crypto_key.data-lake.id
+    default_kms_key_name = google_kms_crypto_key.storage.id
   }
 
   depends_on = [google_kms_crypto_key_iam_binding.bucket-binding]
@@ -48,8 +48,8 @@ resource "google_kms_key_ring" "data-lake" {
   location = "europe-southwest1"
 }
 
-resource "google_kms_crypto_key" "data-lake" {
-  name            = "data-lake-key"
+resource "google_kms_crypto_key" "storage" {
+  name            = "storage-key"
   key_ring        = google_kms_key_ring.data-lake.id
   rotation_period = "7776000s" # 90 days
 }
@@ -57,20 +57,10 @@ resource "google_kms_crypto_key" "data-lake" {
 data "google_storage_project_service_account" "data-lake-account" {
 }
 
-data "google_service_account" "terraform-account" {
-  account_id = "terraform-cloud"
-}
-
 resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
-  crypto_key_id = google_kms_crypto_key.data-lake.id
+  crypto_key_id = google_kms_crypto_key.storage.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members       = ["serviceAccount:${data.google_storage_project_service_account.data-lake-account.email_address}"]
-}
-
-resource "google_kms_key_ring_iam_binding" "terraform-binding" {
-  key_ring_id = google_kms_key_ring.data-lake.id
-  role        = "roles/cloudkms.admin"
-  members     = ["serviceAccount:${data.google_service_account.terraform-account.email}"]
 }
 
 data "google_storage_bucket" "default" {
