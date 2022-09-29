@@ -23,7 +23,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "data-lake" {
-  name                        = "data-lake"
+  name                        = "borealis-data-lake"
   location                    = "EUROPE-SOUTHWEST1"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
@@ -44,7 +44,7 @@ resource "google_storage_bucket" "data-lake" {
 }
 
 resource "google_kms_key_ring" "data-lake" {
-  name     = "borealis-data-lake"
+  name     = "data-lake"
   location = "europe-southwest1"
 }
 
