@@ -52,10 +52,6 @@ resource "google_kms_crypto_key" "data-lake" {
   name            = "data-lake-key"
   key_ring        = google_kms_key_ring.data-lake.id
   rotation_period = "7776000s" # 90 days
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 data "google_storage_project_service_account" "data-lake-account" {
