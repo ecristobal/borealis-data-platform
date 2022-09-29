@@ -37,23 +37,29 @@ resource "google_storage_bucket" "data-lake" {
   }
 
   encryption {
-    default_kms_key_name = google_kms_crypto_key.data-lake-sign-key.id
+    default_kms_key_name = google_kms_crypto_key.data-lake.id
   }
 }
 
-resource "google_kms_key_ring" "data-platform-keyring" {
-  name     = "data-platform-keyring"
+resource "google_kms_key_ring" "data-lake" {
+  name     = "data-lake-test"
   location = "europe-southwest1"
 }
 
-resource "google_kms_crypto_key" "data-lake-sign-key" {
+resource "google_kms_crypto_key" "data-lake" {
   name            = "data-lake-sign"
-  key_ring        = google_kms_key_ring.data-platform-keyring.id
+  key_ring        = google_kms_key_ring.data-lake.id
   rotation_period = "7776000s" # 90 days
 
   lifecycle {
     prevent_destroy = true
   }
+}
+
+resource "google_kms_key_ring_iam_member" "key_ring" {
+  key_ring_id = google_kms_key_ring.data-lake.id
+  role        = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  member      = google_storage_bucket.data-lake.id
 }
 
 data "google_storage_bucket" "default" {
