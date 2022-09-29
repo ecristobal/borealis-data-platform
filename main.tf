@@ -49,7 +49,7 @@ resource "google_kms_key_ring" "data-lake" {
 }
 
 resource "google_kms_crypto_key" "storage" {
-  name            = "storage-key"
+  name            = "storage"
   key_ring        = google_kms_key_ring.data-lake.id
   rotation_period = "7776000s" # 90 days
 }
