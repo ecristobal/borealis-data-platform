@@ -62,11 +62,3 @@ resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members       = ["serviceAccount:${data.google_storage_project_service_account.data-lake-account.email_address}"]
 }
-
-data "google_storage_bucket" "default" {
-  name = google_storage_bucket.data-lake.id
-}
-
-output "bucket_metadata" {
-  value = data.google_storage_bucket.default
-}
