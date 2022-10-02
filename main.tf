@@ -11,7 +11,7 @@ terraform {
     organization = "borealis-infrastructure"
 
     workspaces {
-      name = "borealis-gcp"
+      name = "borealis-gcp-data-platform"
     }
   }
 }
