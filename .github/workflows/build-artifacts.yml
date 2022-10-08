@@ -1,4 +1,4 @@
-name: Build parent artifact
+name: Build Maven artifacts
 
 on:
   push:
@@ -9,11 +9,11 @@ on:
 
 jobs:
   build-artifact:
-    name: Build Borealis parent artifact
+    name: Build Borealis Data Platform artifact
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: applications
+        working-directory: artifacts
     steps:
       - uses: actions/checkout@v3
 

@@ -1,4 +1,4 @@
-name: Release parent artifact
+name: Release Maven artifacts
 
 on:
   release:
@@ -9,11 +9,11 @@ on:
 
 jobs:
   build-release:
-    name: Release Borealis parent artifact
+    name: Release Borealis Data Platform artifact
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: applications
+        working-directory: artifacts
     steps:
       - uses: actions/checkout@v3
 
@@ -39,8 +39,18 @@ jobs:
     name: Delete old artifact versions from artifact repository
     runs-on: ubuntu-latest
     steps:
-      - name: Remove old artifact versions
+      - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.borealis-applications'
+          package-name: 'es.borealis.daycare.center.data-platform-artifacts'
+          min-versions-to-keep: 4
+      - name: Remove old ingestion artifact versions
+        uses: actions/delete-package-versions@v3
+        with:
+          package-name: 'es.borealis.daycare.center.ingestion'
+          min-versions-to-keep: 4
+      - name: Remove old storage artifact versions
+        uses: actions/delete-package-versions@v3
+        with:
+          package-name: 'es.borealis.daycare.center.storage'
           min-versions-to-keep: 4
