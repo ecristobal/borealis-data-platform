@@ -62,7 +62,8 @@ resource "google_kms_crypto_key" "storage" {
   name            = "storage"
   key_ring        = google_kms_key_ring.data-platform.id
   rotation_period = "7776000s" # 90 days
-  labels          = {
+
+  labels = {
     "element" = "storage"
   }
 }
@@ -71,7 +72,8 @@ resource "google_kms_crypto_key" "storage" {
 resource "google_pubsub_topic" "exercises" {
   name         = "borealis.data.input.exercises"
   kms_key_name = google_kms_crypto_key.exercises.id
-  labels       = {
+
+  labels = {
     "element" = "topic"
   }
 }
@@ -92,7 +94,8 @@ resource "google_kms_crypto_key" "exercises" {
   name            = "exercises"
   key_ring        = google_kms_key_ring.data-platform.id
   rotation_period = "7776000s" # 90 days
-  labels          = {
+
+  labels = {
     "element" = "topic"
   }
 }
