@@ -78,8 +78,8 @@ resource "google_pubsub_topic" "exercises" {
 
 resource "google_project_service_identity" "pubsub_service_account" {
   provider = google-beta
-  project = data.google_project.project.project_id
-  service = "pubsub.googleapis.com"
+  project  = data.google_project.project.project_id
+  service  = "pubsub.googleapis.com"
 }
 
 resource "google_kms_crypto_key_iam_binding" "exercises-topic-binding" {
