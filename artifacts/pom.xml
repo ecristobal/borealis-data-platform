@@ -35,7 +35,7 @@
 
     <repositories>
         <repository>
-            <id>borealis-parent</id>
+            <id>github</id>
             <url>https://maven.pkg.github.com/ecristobal/borealis-parent</url>
         </repository>
     </repositories>

@@ -31,7 +31,7 @@ jobs:
 
   check-vulnerabilities:
     name: Check vulnerabilities with Snyk
-    uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml
+    uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml@main
     secrets: inherit
 
   delete-versions:
