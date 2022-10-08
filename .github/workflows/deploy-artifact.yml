@@ -1,0 +1,46 @@
+name: Release parent artifact
+
+on:
+  release:
+    types: [ published ]
+  push:
+    branches:
+      - main
+
+jobs:
+  build-release:
+    name: Release Borealis parent artifact
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: applications
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: 'maven'
+
+      - name: Build & Deploy release
+        run: ./mvnw -B deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  check-vulnerabilities:
+    name: Check vulnerabilities with Snyk
+    uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml
+    secrets: inherit
+
+  delete-versions:
+    needs: build-release
+    name: Delete old artifact versions from artifact repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove old artifact versions
+        uses: actions/delete-package-versions@v3
+        with:
+          package-name: 'es.borealis.daycare.center.borealis-applications'
+          min-versions-to-keep: 4

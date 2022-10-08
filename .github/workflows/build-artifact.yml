@@ -1,0 +1,36 @@
+name: Build parent artifact
+
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+      - main
+  pull_request:
+
+jobs:
+  build-artifact:
+    name: Build Borealis parent artifact
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: applications
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: 'maven'
+
+      - name: Build artifact
+        run: ./mvnw -B clean verify
+
+      - name: Run SonarCloud analysis
+        run: ./mvnw sonar:sonar
+
+  check-vulnerabilities:
+    name: Check vulnerabilities with Snyk
+    uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml
+    secrets: inherit

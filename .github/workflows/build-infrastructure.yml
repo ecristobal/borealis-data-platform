@@ -2,8 +2,13 @@ name: 'Build Borealis Data Platform'
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - 'main'
+    paths:
+      - 'infrastructure/**.tf'
   pull_request:
+    paths:
+      - 'infrastructure/**.tf'
 
 permissions:
   contents: read
@@ -17,46 +22,47 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: infrastructure
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
 
-    - name: Terraform init
-      run: terraform init
+      - name: Terraform init
+        run: terraform init
 
-    - name: Terraform format
-      run: terraform fmt -check
+      - name: Terraform format
+        run: terraform fmt -check
 
-    - name: Terraform validate
-      run: terraform validate -no-color
+      - name: Terraform validate
+        run: terraform validate -no-color
 
-    - name: SonarCloud analysis
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud analysis
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-    - name: Snyk analysis
-      uses: snyk/actions/iac@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        file: main.tf
+      - name: Snyk analysis
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: main.tf
 
-    - name: Upload Snyk analysis result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: snyk.sarif
+      - name: Upload Snyk analysis result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
 
-    - name: Terraform plan
-      run: terraform plan -input=false
+      - name: Terraform plan
+        run: terraform plan -input=false
 
-    - name: Terraform apply
-      if: github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve -input=false
+      - name: Terraform apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -input=false
