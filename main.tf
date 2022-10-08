@@ -91,7 +91,4 @@ resource "google_kms_crypto_key" "exercises" {
 resource "google_kms_key_ring" "data-platform" {
   name     = "data-platform"
   location = "europe-southwest1"
-  labels = {
-    "element" = "security"
-  }
 }
