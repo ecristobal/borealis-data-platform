@@ -55,9 +55,6 @@ resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
   crypto_key_id = google_kms_crypto_key.storage.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members       = ["serviceAccount:${data.google_storage_project_service_account.data-lake-account.email_address}"]
-  labels = {
-    "element" = "storage"
-  }
 }
 
 resource "google_kms_crypto_key" "storage" {
