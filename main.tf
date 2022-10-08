@@ -22,6 +22,8 @@ provider "google" {
   zone    = "europe-southwest1-a"
 }
 
+data "google_project" "project" {}
+
 # Storage definition
 resource "google_storage_bucket" "data-lake" {
   name                        = "borealis-data-lake"
@@ -48,8 +50,7 @@ resource "google_storage_bucket" "data-lake" {
   }
 }
 
-data "google_storage_project_service_account" "data-lake-account" {
-}
+data "google_storage_project_service_account" "data-lake-account" {}
 
 resource "google_kms_crypto_key_iam_binding" "bucket-binding" {
   crypto_key_id = google_kms_crypto_key.storage.id
@@ -61,7 +62,7 @@ resource "google_kms_crypto_key" "storage" {
   name            = "storage"
   key_ring        = google_kms_key_ring.data-platform.id
   rotation_period = "7776000s" # 90 days
-  labels = {
+  labels          = {
     "element" = "storage"
   }
 }
@@ -70,16 +71,28 @@ resource "google_kms_crypto_key" "storage" {
 resource "google_pubsub_topic" "exercises" {
   name         = "borealis.data.input.exercises"
   kms_key_name = google_kms_crypto_key.exercises.id
-  labels = {
+  labels       = {
     "element" = "topic"
   }
+}
+
+resource "google_project_service_identity" "pubsub_service_account" {
+  provider = google-beta
+  project = data.google_project.project.project_id
+  service = "pubsub.googleapis.com"
+}
+
+resource "google_kms_crypto_key_iam_binding" "exercises-topic-binding" {
+  crypto_key_id = google_kms_crypto_key.exercises.id
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  members       = ["serviceAccount:${google_project_service_identity.pubsub_service_account.email}"]
 }
 
 resource "google_kms_crypto_key" "exercises" {
   name            = "exercises"
   key_ring        = google_kms_key_ring.data-platform.id
   rotation_period = "7776000s" # 90 days
-  labels = {
+  labels          = {
     "element" = "topic"
   }
 }
