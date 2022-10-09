@@ -7,6 +7,8 @@ terraform {
     }
   }
 
+  cloud {}
+
 }
 
 provider "google" {
