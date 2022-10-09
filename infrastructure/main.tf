@@ -6,20 +6,12 @@ terraform {
       version = "4.38.0"
     }
   }
-
-  cloud {
-    organization = "borealis-infrastructure"
-
-    workspaces {
-      name = "borealis-gcp-data-platform"
-    }
-  }
+  
 }
 
 provider "google" {
-  project = "borealis-364020"
-  region  = "europe-southwest1"
-  zone    = "europe-southwest1-a"
+  region = "europe-southwest1"
+  zone   = "europe-southwest1-a"
 }
 
 data "google_project" "project" {}

@@ -1,4 +1,4 @@
-name: 'Build Borealis Data Platform'
+name: 'Build Borealis Data Platform infrastructure in staging'
 
 on:
   push:
@@ -15,14 +15,18 @@ permissions:
   security-events: write
 
 jobs:
-  build-infrastructure:
-    name: 'Build infrastructure'
+  build-infrastructure-staging:
+    name: 'Build infrastructure in staging'
     runs-on: ubuntu-latest
 
     defaults:
       run:
         shell: bash
         working-directory: infrastructure
+
+    env:
+      TF_CLOUD_ORGANIZATION: borealis-infrastructure
+      TF_WORKSPACE: borealis-gcp-data-platform
 
     steps:
       - name: Checkout
@@ -35,6 +39,9 @@ jobs:
 
       - name: Terraform init
         run: terraform init
+        with:
+          env:
+
 
       - name: Terraform format
         run: terraform fmt -check
