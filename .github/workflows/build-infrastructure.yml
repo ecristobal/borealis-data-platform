@@ -53,7 +53,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: main.tf
+          file: infrastructure/main.tf
 
       - name: Upload Snyk analysis to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
