@@ -1,4 +1,4 @@
-name: Release Maven artifacts
+name: Deploy Maven artifacts
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-release:
-    name: Release Borealis Data Platform artifact
+    name: Deploy Borealis Data Platform artifacts
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,10 +29,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Run SonarCloud analysis
+        run: ./mvnw sonar:sonar
+
   check-vulnerabilities:
     name: Check vulnerabilities with Snyk
     uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml@main
     secrets: inherit
+    defaults:
+      run:
+        working-directory: artifacts
 
   delete-versions:
     needs: build-release

@@ -39,9 +39,6 @@ jobs:
 
       - name: Terraform init
         run: terraform init
-        with:
-          env:
-
 
       - name: Terraform format
         run: terraform fmt -check

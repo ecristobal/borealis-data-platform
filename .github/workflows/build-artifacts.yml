@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-artifact:
-    name: Build Borealis Data Platform artifact
+    name: Build Borealis Data Platform artifacts
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -27,6 +27,13 @@ jobs:
       - name: Build artifact
         run: ./mvnw -B clean verify
 
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
       - name: Run SonarCloud analysis
         run: ./mvnw sonar:sonar
 
@@ -34,3 +41,6 @@ jobs:
     name: Check vulnerabilities with Snyk
     uses: ecristobal/borealis-parent/.github/workflows/check-vulnerabilities.yml@main
     secrets: inherit
+    defaults:
+      run:
+        working-directory: artifacts
