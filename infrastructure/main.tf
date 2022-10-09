@@ -6,7 +6,7 @@ terraform {
       version = "4.38.0"
     }
   }
-  
+
 }
 
 provider "google" {
