@@ -7,9 +7,11 @@ on:
       - main
     paths:
       - 'artifacts/**'
+      - '.github/workflows/build-artifacts.yml'
   pull_request:
     paths:
       - 'artifacts/**'
+      - '.github/workflows/build-artifacts.yml'
 
 jobs:
   build-artifact:

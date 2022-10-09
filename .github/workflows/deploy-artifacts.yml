@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - 'artifacts/**'
+      - '.github/workflows/deploy-artifacts.yml'
 
 jobs:
   build-release:

@@ -55,7 +55,7 @@ jobs:
         with:
           file: main.tf
 
-      - name: Upload Snyk analysis result to GitHub Code Scanning
+      - name: Upload Snyk analysis to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
