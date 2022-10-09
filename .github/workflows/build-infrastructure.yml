@@ -28,7 +28,7 @@ jobs:
 
     env:
       TF_CLOUD_ORGANIZATION: borealis-infrastructure
-      TF_WORKSPACE: borealis-gcp-data-platform
+      TF_WORKSPACE: borealis-data-platform-gcp-staging
 
     steps:
       - name: Checkout
