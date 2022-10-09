@@ -48,12 +48,6 @@ jobs:
       - name: Terraform validate
         run: terraform validate -no-color
 
-      - name: SonarCloud analysis
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
       - name: Snyk analysis
         uses: snyk/actions/iac@master
         env:

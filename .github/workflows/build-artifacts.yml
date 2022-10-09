@@ -31,19 +31,6 @@ jobs:
       - name: Build artifact
         run: ./mvnw -B clean verify
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Run SonarCloud analysis
-        run: ./mvnw sonar:sonar \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.organization=ecristobal \
-          -Dsonar.projectKey=ecristobal_borealis-data-platform
-
   check-vulnerabilities:
     name: Check vulnerabilities with Snyk
     runs-on: ubuntu-latest
