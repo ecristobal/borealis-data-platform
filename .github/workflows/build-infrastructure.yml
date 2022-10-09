@@ -6,9 +6,11 @@ on:
       - 'main'
     paths:
       - 'infrastructure/**.tf'
+      - '.github/workflows/build-infrastructure.yml'
   pull_request:
     paths:
       - 'infrastructure/**.tf'
+      - '.github/workflows/build-infrastructure.yml'
 
 permissions:
   contents: read

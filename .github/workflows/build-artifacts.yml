@@ -5,7 +5,11 @@ on:
     branches-ignore:
       - 'dependabot/**'
       - main
+    paths:
+      - 'artifacts/**'
   pull_request:
+    paths:
+      - 'artifacts/**'
 
 jobs:
   build-artifact:
@@ -35,7 +39,10 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Run SonarCloud analysis
-        run: ./mvnw sonar:sonar
+        run: ./mvnw sonar:sonar \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.organization=ecristobal \
+          -Dsonar.projectKey=ecristobal_borealis-data-platform
 
   check-vulnerabilities:
     name: Check vulnerabilities with Snyk
