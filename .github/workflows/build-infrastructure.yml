@@ -54,8 +54,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          key: ${{ runner.os }}-sonar-infra
+          restore-keys: ${{ runner.os }}-sonar-infra
 
       - name: Run SonarCloud analysis
         uses: sonarsource/sonarcloud-github-action@master

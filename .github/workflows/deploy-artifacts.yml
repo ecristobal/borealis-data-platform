@@ -42,8 +42,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          key: ${{ runner.os }}-sonar-maven
+          restore-keys: ${{ runner.os }}-sonar-maven
 
       - name: Run SonarCloud analysis
         run: |
