@@ -48,17 +48,21 @@ jobs:
       - name: Terraform validate
         run: terraform validate -no-color
 
+      - name: Run SonarCloud analysis
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          fetch-depth: 0
+          projectBaseDir: infrastructure
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Snyk analysis
         uses: snyk/actions/iac@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: infrastructure/main.tf
-
-      - name: Upload Snyk analysis to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
 
       - name: Terraform plan
         run: terraform plan -input=false
