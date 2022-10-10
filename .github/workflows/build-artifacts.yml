@@ -46,7 +46,8 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Run SonarCloud analysis
-        run: ./mvnw -B sonar:sonar \
+        run: |
+          ./mvnw -B sonar:sonar \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=ecristobal \
           -Dsonar.projectKey=ecristobal_borealis-data-platform
