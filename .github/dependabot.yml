@@ -2,6 +2,6 @@ version: 2
 
 updates:
   - package-ecosystem: 'maven'
-    directory: '/'
+    directory: '/artifacts'
     schedule:
       interval: 'daily'
