@@ -3,7 +3,6 @@ name: Build Maven artifacts
 on:
   push:
     branches-ignore:
-      - 'dependabot/**'
       - main
     paths:
       - 'artifacts/**'
@@ -35,6 +34,7 @@ jobs:
       - name: Build artifacts
         run: ./mvnw -B clean verify
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Checkstyle analysis
