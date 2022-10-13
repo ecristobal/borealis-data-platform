@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>storage</artifactId>
+    <artifactId>data-platform-storage</artifactId>
     <packaging>pom</packaging>
 
     <name>Borealis Data Platform Storage artifacts</name>

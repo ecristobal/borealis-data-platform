@@ -67,10 +67,10 @@ jobs:
       - name: Remove old ingestion artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.ingestion'
+          package-name: 'es.borealis.daycare.center.data-platform-ingestion'
           min-versions-to-keep: 4
       - name: Remove old storage artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.storage'
+          package-name: 'es.borealis.daycare.center.data-platform-storage'
           min-versions-to-keep: 4
