@@ -11,6 +11,11 @@ terraform {
 
 }
 
+resource "confluent_service_account" "app-manager" {
+  display_name = "borealis-support"
+  description  = "Service account to manage Kafka cluster"
+}
+
 resource "confluent_environment" "staging" {
   display_name = "Staging"
 
@@ -23,7 +28,7 @@ resource "confluent_kafka_cluster" "staging" {
   display_name = "borealis-staging"
   availability = "SINGLE_ZONE"
   cloud        = "GCP"
-  region       = "europe-west1"
+  region       = "europe-west3"
 
   basic {}
 
@@ -36,7 +41,18 @@ resource "confluent_kafka_cluster" "staging" {
   }
 }
 
-resource "confluent_service_account" "app-manager" {
-  display_name = "borealis-support"
-  description  = "Service account to manage Kafka cluster"
+resource "confluent_stream_governance_cluster" "essentials" {
+  package = "ESSENTIALS"
+
+  environment {
+    id = confluent_environment.staging.id
+  }
+
+  region {
+    id = "sgreg-5"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
