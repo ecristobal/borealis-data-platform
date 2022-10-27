@@ -26,3 +26,4 @@ jobs:
       working-directory: infrastructure/gcp
       terraform-organization: borealis-infrastructure
       terraform-workspace: borealis-data-platform-gcp-staging
+    secrets: inherit
