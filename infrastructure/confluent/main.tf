@@ -18,10 +18,6 @@ resource "confluent_service_account" "app-manager" {
 
 resource "confluent_environment" "staging" {
   display_name = "Staging"
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "confluent_kafka_cluster" "staging" {
@@ -35,10 +31,6 @@ resource "confluent_kafka_cluster" "staging" {
   environment {
     id = confluent_environment.staging.id
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "confluent_stream_governance_cluster" "essentials" {
@@ -50,9 +42,5 @@ resource "confluent_stream_governance_cluster" "essentials" {
 
   region {
     id = "sgreg-5"
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
