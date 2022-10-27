@@ -1,0 +1,29 @@
+name: 'Build Borealis Data Platform Confluent infrastructure'
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'infrastructure/confluent/**'
+      - '.github/workflows/build-terraform.yml'
+      - '.github/workflows/build-confluent-infra.yml'
+  pull_request:
+    paths:
+      - 'infrastructure/confluent/**'
+      - '.github/workflows/build-terraform.yml'
+      - '.github/workflows/build-confluent-infra.yml'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  build-confluent-infra-staging:
+    name: 'Build confluent infrastructure in staging'
+    uses: ecristobal/borealis-data-platform/.github/workflows/build-terraform.yml@main
+    with:
+      working-directory: infrastructure/confluent
+      terraform-organization: borealis-infrastructure
+      terraform-workspace: borealis-data-platform-confluent-staging
+    secrets: inherit
