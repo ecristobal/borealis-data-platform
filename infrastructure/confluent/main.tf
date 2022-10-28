@@ -88,7 +88,7 @@ resource "confluent_kafka_topic" "exercises" {
   topic_name       = "es.borealis.exercises.landing"
   partitions_count = 2
   rest_endpoint    = confluent_kafka_cluster.cluster.rest_endpoint
-  config           = {
+  config = {
     "cleanup.policy"      = "compact"
     "delete.retention.ms" = "86400000"
     "retention.ms"        = "604800000"
