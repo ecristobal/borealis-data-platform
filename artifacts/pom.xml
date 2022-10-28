@@ -10,16 +10,16 @@
         <version>0.2.1</version>
     </parent>
 
-    <artifactId>data-platform-artifacts</artifactId>
+    <groupId>es.borealis.daycare.center.data.platform</groupId>
+    <artifactId>artifacts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Borealis Data Platform Application artifacts</name>
+    <name>Borealis Data Platform Parent</name>
     <description>Parent project for Borealis Data Platform artifacts</description>
 
     <modules>
-        <module>data-platform-storage</module>
-        <module>data-platform-ingestion</module>
+        <module>exercises</module>
     </modules>
 
     <scm>

@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.borealis.daycare.center</groupId>
-        <artifactId>data-platform-artifacts</artifactId>
+        <groupId>es.borealis.daycare.center.data.platform</groupId>
+        <artifactId>artifacts</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>data-platform-ingestion</artifactId>
+    <artifactId>exercises</artifactId>
     <packaging>pom</packaging>
 
-    <name>Borealis Data Platform Ingestion artifacts</name>
-    <description>Parent project for Borealis Data Platform Ingestion artifacts</description>
+    <name>Borealis Data Platform artifacts - Exercises</name>
+    <description>Parent project for Borealis Data Platform artifacts of exercises domain</description>
 
 </project>
