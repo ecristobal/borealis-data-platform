@@ -20,6 +20,22 @@ data "google_project" "project" {}
 
 data "google_storage_project_service_account" "storage-account" {}
 
+# Settings to enable NewRelic monitoring
+resource "google_project_iam_member" "project" {
+  project = data.google_project.project.id
+  role    = "roles/viewer"
+  member  = "serviceAccount:v73nzkydm3w@newrelic-gcp.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_binding" "project" {
+  project = data.google_project.project.id
+  role    = "roles/serviceusage.serviceUsageConsumer"
+
+  members = [
+    "serviceAccount:73nzkydm3w@newrelic-gcp.iam.gserviceaccount.com",
+  ]
+}
+
 # Data lake storage definition
 resource "google_storage_bucket" "data-lake" {
   name                        = "borealis-data-lake"
