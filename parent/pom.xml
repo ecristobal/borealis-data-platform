@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>es.borealis.daycare.center.data.platform</groupId>
-    <artifactId>artifacts</artifactId>
+    <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 

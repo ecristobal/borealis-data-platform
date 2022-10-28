@@ -6,14 +6,15 @@
 
     <parent>
         <groupId>es.borealis.daycare.center.data.platform</groupId>
-        <artifactId>artifacts</artifactId>
+        <artifactId>parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>exercises</artifactId>
+    <groupId>es.borealis.daycare.center.data.platform.exercises</groupId>
+    <artifactId>parent</artifactId>
     <packaging>pom</packaging>
 
-    <name>Borealis Data Platform artifacts - Exercises</name>
+    <name>Borealis Data Platform Exercises - Parent</name>
     <description>Parent project for Borealis Data Platform artifacts of exercises domain</description>
 
 </project>
