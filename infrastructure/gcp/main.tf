@@ -12,8 +12,8 @@ terraform {
 }
 
 provider "google" {
-  region = "europe-southwest1"
-  zone   = "europe-southwest1-a"
+  region = "europe-west3"
+  zone   = "europe-west3-a"
 }
 
 data "google_project" "project" {}
@@ -23,7 +23,7 @@ data "google_storage_project_service_account" "storage-account" {}
 # Data lake storage definition
 resource "google_storage_bucket" "data-lake" {
   name                        = "borealis-data-lake"
-  location                    = "EUROPE-SOUTHWEST1"
+  location                    = "EUROPE-WEST3"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
 
@@ -65,5 +65,5 @@ resource "google_kms_crypto_key" "data-lake" {
 # KMS definition
 resource "google_kms_key_ring" "data-platform" {
   name     = "data-platform"
-  location = "europe-southwest1"
+  location = "europe-west3"
 }
