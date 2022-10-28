@@ -20,8 +20,8 @@ resource "confluent_environment" "staging" {
   display_name = "Staging"
 }
 
-resource "confluent_kafka_cluster" "staging" {
-  display_name = "borealis-staging"
+resource "confluent_kafka_cluster" "cluster" {
+  display_name = "borealis"
   availability = "SINGLE_ZONE"
   cloud        = "GCP"
   region       = "europe-west3"
@@ -48,12 +48,14 @@ resource "confluent_stream_governance_cluster" "essentials" {
 resource "confluent_kafka_topic" "exercises" {
 
   kafka_cluster {
-    id = confluent_kafka_cluster.staging.id
+    id = confluent_kafka_cluster.cluster.id
   }
 
   topic_name       = "es.borealis.exercises.landing"
   partitions_count = 2
+  rest_endpoint    = confluent_kafka_cluster.cluster.rest_endpoint
   config = {
+    "cleanup.policy"      = "compact"
     "delete.retention.ms" = "86400000"
     "retention.ms"        = "604800000"
   }
