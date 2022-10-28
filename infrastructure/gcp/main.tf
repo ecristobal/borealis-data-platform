@@ -32,7 +32,7 @@ resource "google_project_iam_binding" "project" {
   role    = "roles/serviceusage.serviceUsageConsumer"
 
   members = [
-    "serviceAccount:73nzkydm3w@newrelic-gcp.iam.gserviceaccount.com",
+    "serviceAccount:v73nzkydm3w@newrelic-gcp.iam.gserviceaccount.com"
   ]
 }
 

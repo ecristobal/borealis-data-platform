@@ -44,3 +44,16 @@ resource "confluent_stream_governance_cluster" "essentials" {
     id = "sgreg-5"
   }
 }
+
+resource "confluent_kafka_topic" "exercises" {
+  kafka_cluster {
+    id = confluent_kafka_cluster.staging.id
+  }
+  topic_name       = "es.borealis.exercises.landing"
+  partitions_count = 2
+  config           = {
+    "cleanup.policy"    = "compact"
+    "max.message.bytes" = "12345"
+    "retention.ms"      = "67890"
+  }
+}
