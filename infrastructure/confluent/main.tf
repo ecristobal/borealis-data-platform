@@ -39,7 +39,7 @@ resource "confluent_role_binding" "app-manager-kafka-cluster-admin" {
   crn_pattern = confluent_kafka_cluster.cluster.rbac_crn
 }
 
-resource "confluent_api_key" "app-manager-kafka-api-key" {
+resource "confluent_api_key" "app-manager-api-key" {
   display_name = "app-manager-kafka-api-key"
   description  = "Kafka API Key that is owned by 'app-manager' service account"
   owner {
@@ -88,7 +88,7 @@ resource "confluent_kafka_topic" "exercises" {
   topic_name       = "es.borealis.exercises.landing"
   partitions_count = 2
   rest_endpoint    = confluent_kafka_cluster.cluster.rest_endpoint
-  config = {
+  config           = {
     "cleanup.policy"      = "compact"
     "delete.retention.ms" = "86400000"
     "retention.ms"        = "604800000"
