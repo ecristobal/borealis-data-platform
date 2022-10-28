@@ -33,6 +33,40 @@ resource "confluent_kafka_cluster" "cluster" {
   }
 }
 
+resource "confluent_role_binding" "app-manager-kafka-cluster-admin" {
+  principal   = "User:${confluent_service_account.app-manager.id}"
+  role_name   = "CloudClusterAdmin"
+  crn_pattern = confluent_kafka_cluster.cluster.rbac_crn
+}
+
+resource "confluent_api_key" "app-manager-kafka-api-key" {
+  display_name = "app-manager-kafka-api-key"
+  description  = "Kafka API Key that is owned by 'app-manager' service account"
+  owner {
+    id          = confluent_service_account.app-manager.id
+    api_version = confluent_service_account.app-manager.api_version
+    kind        = confluent_service_account.app-manager.kind
+  }
+
+  managed_resource {
+    id          = confluent_kafka_cluster.cluster.id
+    api_version = confluent_kafka_cluster.cluster.api_version
+    kind        = confluent_kafka_cluster.cluster.kind
+
+    environment {
+      id = confluent_environment.staging.id
+    }
+  }
+
+  depends_on = [
+    confluent_role_binding.app-manager-kafka-cluster-admin
+  ]
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "confluent_stream_governance_cluster" "essentials" {
   package = "ESSENTIALS"
 
@@ -58,5 +92,10 @@ resource "confluent_kafka_topic" "exercises" {
     "cleanup.policy"      = "compact"
     "delete.retention.ms" = "86400000"
     "retention.ms"        = "604800000"
+  }
+
+  credentials {
+    key    = confluent_api_key.app-manager-api-key.id
+    secret = confluent_api_key.app-manager-api-key.secret
   }
 }
