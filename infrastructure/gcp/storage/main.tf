@@ -1,13 +1,3 @@
-variable "storage-name" {
-  type        = string
-  description = "Storage name"
-}
-
-variable "kms-key-ring-id" {
-  type        = string
-  description = "Google Cloud KMS key ring ID"
-}
-
 data "google_storage_project_service_account" "storage-account" {}
 
 resource "google_storage_bucket" "data-lake" {
@@ -19,7 +9,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = "STANDARD"
+      matches_storage_class = ["STANDARD"]
     }
     action {
       type          = "SetStorageClass"
@@ -30,7 +20,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = "NEARLINE"
+      matches_storage_class = ["NEARLINE"]
     }
     action {
       type          = "SetStorageClass"
@@ -41,7 +31,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = "COLDLINE"
+      matches_storage_class = ["COLDLINE"]
     }
     action {
       type          = "SetStorageClass"

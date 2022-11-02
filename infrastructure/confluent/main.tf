@@ -16,10 +16,6 @@ resource "confluent_service_account" "app-manager" {
   description  = "Service account to manage Kafka cluster"
 }
 
-resource "confluent_environment" "staging" {
-  display_name = "Staging"
-}
-
 resource "confluent_kafka_cluster" "cluster" {
   display_name = "borealis"
   availability = "SINGLE_ZONE"
@@ -29,7 +25,7 @@ resource "confluent_kafka_cluster" "cluster" {
   basic {}
 
   environment {
-    id = confluent_environment.staging.id
+    id = var.ENVIRONMENT_ID
   }
 }
 
@@ -54,7 +50,7 @@ resource "confluent_api_key" "app-manager-api-key" {
     kind        = confluent_kafka_cluster.cluster.kind
 
     environment {
-      id = confluent_environment.staging.id
+      id = var.ENVIRONMENT_ID
     }
   }
 
@@ -66,12 +62,11 @@ resource "confluent_api_key" "app-manager-api-key" {
     prevent_destroy = true
   }
 }
-
 resource "confluent_stream_governance_cluster" "essentials" {
   package = "ESSENTIALS"
 
   environment {
-    id = confluent_environment.staging.id
+    id = var.ENVIRONMENT_ID
   }
 
   region {
