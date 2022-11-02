@@ -1,7 +1,7 @@
 data "google_storage_project_service_account" "storage-account" {}
 
 resource "google_storage_bucket" "data-lake" {
-  name                        = var.storage-name
+  name                        = "borealis-${var.storage-name}"
   location                    = "EUROPE-WEST3"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
