@@ -41,28 +41,28 @@ resource "google_kms_key_ring" "data-platform" {
 }
 
 # Buckets definition
-module "bucket" {
+module "bucket-landing" {
   source = "./storage"
 
-  storage-name    = "data-lake-landing"
+  storage-name    = "landing"
   kms-key-ring-id = google_kms_key_ring.data-platform.id
 }
 
-module "bucket" {
+module "bucket-landing-failed" {
   source = "./storage"
 
   storage-name    = "landing-failed"
   kms-key-ring-id = google_kms_key_ring.data-platform.id
 }
 
-module "bucket" {
+module "bucket-staging" {
   source = "./storage"
 
-  storage-name    = "data-lake-staging"
+  storage-name    = "staging"
   kms-key-ring-id = google_kms_key_ring.data-platform.id
 }
 
-module "bucket" {
+module "bucket-staging-failed" {
   source = "./storage"
 
   storage-name    = "staging-failed"
