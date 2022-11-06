@@ -6,12 +6,12 @@ on:
       - 'main'
     paths:
       - 'infrastructure/confluent/**'
-      - '.github/workflows/templates/build-terraform.yml'
+      - '.github/workflows/build-terraform.yml'
       - '.github/workflows/build-confluent-infra.yml'
   pull_request:
     paths:
       - 'infrastructure/confluent/**'
-      - '.github/workflows/templates/build-terraform.yml'
+      - '.github/workflows//build-terraform.yml'
       - '.github/workflows/build-confluent-infra.yml'
 
 permissions:
@@ -21,7 +21,7 @@ permissions:
 jobs:
   build-confluent-infra-staging:
     name: 'Build confluent infrastructure in staging'
-    uses: ecristobal/borealis-data-platform/.github/workflows/templates/build-terraform.yml@main
+    uses: ecristobal/borealis-data-platform/.github/workflows/build-terraform.yml@main
     with:
       domain: confluent
       terraform-organization: borealis-infrastructure

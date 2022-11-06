@@ -8,13 +8,13 @@ on:
       - main
     paths:
       - 'artifacts/exercises/**'
-      - '.github/workflows/templates/deploy-artifacts.yml'
+      - '.github/workflows/deploy-artifacts.yml'
       - '.github/workflows/deploy-exercises-artifacts.yml'
 
 jobs:
   deploy-artifacts:
     name: Deploy Borealis Data Platform artifacts for Exercises
-    uses: ecristobal/borealis-data-platform/.github/workflows/templates/deploy-artifacts.yml@main
+    uses: ecristobal/borealis-data-platform/.github/workflows/deploy-artifacts.yml@main
     with:
       working-directory: artifacts/exercises
     secrets: inherit
