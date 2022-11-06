@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Exercises</name>
+    <name>Exercise</name>
     <description>Parent project for Borealis Data Platform artifacts of exercises domain</description>
 
     <modules>

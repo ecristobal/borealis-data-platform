@@ -14,7 +14,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
 
-    <name>Exercises Schemas</name>
+    <name>Exercise Schemas</name>
     <description>Parent project for Borealis Data Platform artifacts of exercise data schemas</description>
 
     <modules>
