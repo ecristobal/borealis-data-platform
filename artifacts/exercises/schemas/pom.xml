@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>es.borealis.daycare.center.data.platform.exercises</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>schemas-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Exercises Schemas - Parent</name>
+    <description>Parent project for Borealis Data Platform artifacts of exercise data schemas</description>
+
+    <modules>
+        <module>json</module>
+        <module>avro</module>
+        <module>parquet</module>
+    </modules>
+
+</project>

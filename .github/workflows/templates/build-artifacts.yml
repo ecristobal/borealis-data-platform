@@ -1,16 +1,11 @@
 name: Build Maven artifacts
 
 on:
-  push:
-    branches-ignore:
-      - main
-    paths:
-      - 'artifacts/**'
-      - '.github/workflows/build-artifacts.yml'
-  pull_request:
-    paths:
-      - 'artifacts/**'
-      - '.github/workflows/build-artifacts.yml'
+  workflow_call:
+    inputs:
+      domain:
+        required: true
+        type: string
 
 jobs:
   build-artifact:
@@ -18,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: artifacts
+        working-directory: artifacts/${{ inputs.domain }}
     steps:
       - uses: actions/checkout@v3.1.0
         with:
@@ -52,6 +47,6 @@ jobs:
           ./mvnw -B sonar:sonar \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=ecristobal \
-          -Dsonar.projectKey=ecristobal_borealis-data-platform
+          -Dsonar.projectKey=ecristobal_borealis-data-platform-${{ inputs.domain }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

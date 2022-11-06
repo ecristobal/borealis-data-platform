@@ -5,16 +5,37 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.borealis.daycare.center.data.platform</groupId>
-        <artifactId>parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>es.borealis.daycare.center</groupId>
+        <artifactId>borealis-parent</artifactId>
+        <version>0.2.1</version>
     </parent>
 
     <groupId>es.borealis.daycare.center.data.platform.exercises</groupId>
     <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Borealis Data Platform Exercises - Parent</name>
+    <name>Exercises - Parent</name>
     <description>Parent project for Borealis Data Platform artifacts of exercises domain</description>
+
+    <modules>
+        <module>schemas</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/ecristobal/borealis-data-platform</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages - Borealis Parent</name>
+            <url>https://maven.pkg.github.com/ecristobal/borealis-parent</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -3,7 +3,7 @@ name: 'Build infrastructure'
 on:
   workflow_call:
     inputs:
-      working-directory:
+      domain:
         required: true
         type: string
       terraform-organization:
@@ -25,7 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ inputs.working-directory }}
+        working-directory: infrastructure/${{ inputs.domain }}
 
     env:
       TF_CLOUD_ORGANIZATION: ${{ inputs.terraform-organization }}
@@ -55,10 +55,10 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@master
         with:
           fetch-depth: 0
-          projectBaseDir: ${{ inputs.working-directory }}
+          projectBaseDir: infrastructure/${{ inputs.domain }}
           args: >
             -Dsonar.organization=ecristobal
-            -Dsonar.projectKey=ecristobal_borealis-data-platform-infra
+            -Dsonar.projectKey=ecristobal_borealis-data-platform-infra-${{ inputs.domain }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -68,7 +68,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: ${{ inputs.working-directory }}/main.tf
+          file: infrastructure/${{ inputs.domain }}/main.tf
 
       - name: Terraform plan
         run: terraform plan -input=false
