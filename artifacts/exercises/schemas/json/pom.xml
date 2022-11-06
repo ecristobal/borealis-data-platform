@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.borealis.daycare.center.data.platform.exercises</groupId>
-        <artifactId>schemas-parent</artifactId>
+        <groupId>es.borealis.daycare.center.data.platform.exercises.schemas</groupId>
+        <artifactId>parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>json-schema</artifactId>
+    <artifactId>json</artifactId>
 
-    <name>Exercises Schemas - JSON</name>
+    <name>JSON Exercise Schema</name>
     <description>JSON schema to map exercise data</description>
 
 </project>

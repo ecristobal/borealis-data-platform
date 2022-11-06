@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.borealis.daycare.center.data.platform.exercises</groupId>
-        <artifactId>schemas-parent</artifactId>
+        <groupId>es.borealis.daycare.center.data.platform.exercises.schemas</groupId>
+        <artifactId>parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>parquet-schema</artifactId>
+    <artifactId>parquet</artifactId>
 
-    <name>Exercises Schemas - Parquet</name>
+    <name>Parquet Exercise Schema</name>
     <description>Parquet schema to map exercise data</description>
 
 </project>

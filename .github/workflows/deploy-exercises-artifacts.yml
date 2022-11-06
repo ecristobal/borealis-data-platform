@@ -33,23 +33,23 @@ jobs:
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas-parent'
+          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.parent'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.json-schema'
+          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.json'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.avro-schema'
+          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.avro'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.parquet-schema'
+          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.parquet'
           min-versions-to-keep: 4
