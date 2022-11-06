@@ -47,6 +47,6 @@ jobs:
           ./mvnw -B sonar:sonar \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=ecristobal \
-          -Dsonar.projectKey=ecristobal_borealis-data-platform-${{ inputs.domain }}
+          -Dsonar.projectKey=ecristobal_borealis-data-platform-artifacts-${{ inputs.domain }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

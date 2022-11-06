@@ -58,7 +58,7 @@ jobs:
           projectBaseDir: infrastructure/${{ inputs.domain }}
           args: >
             -Dsonar.organization=ecristobal
-            -Dsonar.projectKey=ecristobal_borealis-data-platform-infra-${{ inputs.domain }}
+            -Dsonar.projectKey=ecristobal_borealis-data-platform-infrastructure-${{ inputs.domain }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
