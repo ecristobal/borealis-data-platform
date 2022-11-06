@@ -40,7 +40,7 @@ resource "google_storage_bucket" "data-lake" {
   }
 
   versioning {
-    enabled = false
+    enabled = true
   }
 
   logging {
