@@ -12,7 +12,7 @@
 
     <artifactId>json</artifactId>
 
-    <name>JSON Exercise Schema</name>
+    <name>Exercise - Data Schema - JSON</name>
     <description>JSON schema to map exercise data</description>
 
 </project>

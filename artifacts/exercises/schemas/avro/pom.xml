@@ -12,7 +12,7 @@
 
     <artifactId>avro</artifactId>
 
-    <name>Avro Exercise Schema</name>
+    <name>Exercise - Data Schema - Avro</name>
     <description>Avro schema to map exercise data</description>
 
 </project>

@@ -12,7 +12,7 @@
 
     <artifactId>parquet</artifactId>
 
-    <name>Parquet Exercise Schema</name>
+    <name>Exercise - Data Schema - Parquet</name>
     <description>Parquet schema to map exercise data</description>
 
 </project>
