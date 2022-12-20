@@ -1,55 +1,55 @@
 name: Deploy Maven artifacts for Exercises
 
-on:
+on  :
   release:
     types: [ published ]
-  push:
+  push   :
     branches:
       - main
-    paths:
+    paths   :
       - 'artifacts/exercises/**'
       - '.github/workflows/deploy-artifacts.yml'
       - '.github/workflows/deploy-exercises-artifacts.yml'
 
 jobs:
   deploy-artifacts:
-    name: Deploy Borealis Data Platform artifacts for Exercises
-    uses: ecristobal/borealis-data-platform/.github/workflows/deploy-artifacts.yml@main
-    with:
+    name   : Deploy Borealis Data Platform artifacts for Exercises
+    uses   : ecristobal/borealis-data-platform/.github/workflows/deploy-artifacts.yml@main
+    with   :
       domain: exercises
     secrets: inherit
 
-  delete-versions:
-    needs: deploy-artifacts
-    name: Delete old artifact versions from artifact repository
+  delete-versions :
+    needs  : deploy-artifacts
+    name   : Delete old artifact versions from artifact repository
     runs-on: ubuntu-latest
-    steps:
+    steps  :
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.parent'
+          package-name        : 'es.borealis.daycare.center.data.platform.exercises.parent'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.parent'
+          package-name        : 'es.borealis.daycare.center.data.platform.exercises.schemas.parent'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.json'
+          package-name        : 'es.borealis.daycare.center.data.platform.exercises.schemas.json'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.avro'
+          package-name        : 'es.borealis.daycare.center.data.platform.exercises.schemas.avro'
           min-versions-to-keep: 4
 
       - name: Remove old parent artifact versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'es.borealis.daycare.center.data.platform.exercises.schemas.parquet'
+          package-name        : 'es.borealis.daycare.center.data.platform.exercises.schemas.parquet'
           min-versions-to-keep: 4

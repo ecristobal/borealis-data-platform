@@ -1,16 +1,16 @@
-version: 2
+version   : 2
 
-updates:
+updates   :
   - package-ecosystem: 'maven'
-    directory: '/artifacts'
-    registries:
+    directory        : '/artifacts'
+    registries       :
       - maven-github
-    schedule:
+    schedule         :
       interval: 'daily'
 
 registries:
   maven-github:
-    type: maven-repository
-    url: https://maven.pkg.github.com/ecristobal/borealis-parent
+    type    : maven-repository
+    url     : https://maven.pkg.github.com/ecristobal/borealis-parent
     username: ecristobal
     password: ${{ secrets.MAVEN_TOKEN }}

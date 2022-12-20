@@ -1,10 +1,10 @@
-name: 'Build Borealis Data Platform GCP infrastructure'
+name       : 'Build Borealis Data Platform GCP infrastructure'
 
-on:
-  push:
+on         :
+  push        :
     branches:
       - 'main'
-    paths:
+    paths   :
       - 'infrastructure/gcp/**'
       - '.github/workflows/build-terraform.yml'
       - '.github/workflows/build-gcp-infra.yml'
@@ -15,15 +15,15 @@ on:
       - '.github/workflows/build-gcp-infra.yml'
 
 permissions:
-  contents: read
+  contents       : read
   security-events: write
 
-jobs:
+jobs       :
   build-gcp-infra-staging:
-    name: 'Build GCP infrastructure in staging'
-    uses: ecristobal/borealis-data-platform/.github/workflows/build-terraform.yml@main
-    with:
-      domain: gcp
+    name   : 'Build GCP infrastructure in staging'
+    uses   : ecristobal/borealis-data-platform/.github/workflows/build-terraform.yml@main
+    with   :
+      domain                : gcp
       terraform-organization: borealis-infrastructure
-      terraform-workspace: borealis-data-platform-gcp-staging
+      terraform-workspace   : borealis-data-platform-gcp-staging
     secrets: inherit

@@ -1,20 +1,20 @@
 name: Deploy Maven artifacts
 
-on:
+on  :
   workflow_call:
     inputs:
       domain:
         required: true
-        type: string
+        type    : string
 
 jobs:
   build-release:
-    name: Deploy Borealis Data Platform artifacts
-    runs-on: ubuntu-latest
+    name    : Deploy Borealis Data Platform artifacts
+    runs-on : ubuntu-latest
     defaults:
       run:
         working-directory: artifacts
-    steps:
+    steps   :
       - uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
@@ -24,29 +24,29 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-          cache: 'maven'
+          cache       : 'maven'
 
       - name: Build & Deploy artifacts
-        run: ./mvnw -B deploy -f ${{ inputs.domain }}/pom.xml
-        env:
+        run : ./mvnw -B deploy -f ${{ inputs.domain }}/pom.xml
+        env :
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN  : ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Checkstyle analysis
-        run: ./mvnw -B checkstyle:checkstyle -f ${{ inputs.domain }}/pom.xml
+        run : ./mvnw -B checkstyle:checkstyle -f ${{ inputs.domain }}/pom.xml
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar-maven
+          path        : ~/.sonar/cache
+          key         : ${{ runner.os }}-sonar-maven
           restore-keys: ${{ runner.os }}-sonar-maven
 
       - name: Run SonarCloud analysis
-        run: |
+        run : |
           ./mvnw -B sonar:sonar  -f ${{ inputs.domain }}/pom.xml \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=ecristobal \
           -Dsonar.projectKey=ecristobal_borealis-data-platform-artifacts-${{ inputs.domain }}
-        env:
+        env :
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

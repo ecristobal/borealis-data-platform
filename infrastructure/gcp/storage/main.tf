@@ -9,7 +9,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = ["STANDARD"]
+      matches_storage_class = [ "STANDARD" ]
     }
     action {
       type          = "SetStorageClass"
@@ -20,7 +20,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = ["NEARLINE"]
+      matches_storage_class = [ "NEARLINE" ]
     }
     action {
       type          = "SetStorageClass"
@@ -31,7 +31,7 @@ resource "google_storage_bucket" "data-lake" {
   lifecycle_rule {
     condition {
       age                   = 30
-      matches_storage_class = ["COLDLINE"]
+      matches_storage_class = [ "COLDLINE" ]
     }
     action {
       type          = "SetStorageClass"
@@ -51,7 +51,7 @@ resource "google_storage_bucket" "data-lake" {
     default_kms_key_name = google_kms_crypto_key.data-lake.id
   }
 
-  depends_on = [google_kms_crypto_key_iam_binding.data-lake-binding]
+  depends_on = [ google_kms_crypto_key_iam_binding.data-lake-binding ]
 
   labels = {
     "element" = "storage"
@@ -61,7 +61,7 @@ resource "google_storage_bucket" "data-lake" {
 resource "google_kms_crypto_key_iam_binding" "data-lake-binding" {
   crypto_key_id = google_kms_crypto_key.data-lake.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-  members       = ["serviceAccount:${data.google_storage_project_service_account.storage-account.email_address}"]
+  members       = [ "serviceAccount:${data.google_storage_project_service_account.storage-account.email_address}" ]
 }
 
 resource "google_kms_crypto_key" "data-lake" {

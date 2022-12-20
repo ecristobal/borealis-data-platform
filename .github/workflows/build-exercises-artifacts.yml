@@ -1,10 +1,10 @@
 name: Build Maven artifacts for Exercises
 
-on:
-  push:
+on  :
+  push        :
     branches-ignore:
       - main
-    paths:
+    paths          :
       - 'artifacts/exercises/**'
       - '.github/workflows/build-artifacts.yml'
       - '.github/workflows/build-exercises-artifacts.yml'
@@ -16,8 +16,8 @@ on:
 
 jobs:
   build-artifact:
-    name: Build Borealis Data Platform artifacts for Exercises
-    uses: ecristobal/borealis-data-platform/.github/workflows/build-artifacts.yml@main
-    with:
+    name   : Build Borealis Data Platform artifacts for Exercises
+    uses   : ecristobal/borealis-data-platform/.github/workflows/build-artifacts.yml@main
+    with   :
       domain: exercises
     secrets: inherit

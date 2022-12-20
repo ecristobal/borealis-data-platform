@@ -1,37 +1,37 @@
-name: 'Build infrastructure'
+name       : 'Build infrastructure'
 
-on:
+on         :
   workflow_call:
     inputs:
-      domain:
+      domain                :
         required: true
-        type: string
+        type    : string
       terraform-organization:
         required: true
-        type: string
-      terraform-workspace:
+        type    : string
+      terraform-workspace   :
         required: true
-        type: string
+        type    : string
 
 permissions:
-  contents: read
+  contents       : read
   security-events: write
 
-jobs:
+jobs       :
   build-infrastructure-staging:
-    name: 'Build infrastructure'
-    runs-on: ubuntu-latest
+    name    : 'Build infrastructure'
+    runs-on : ubuntu-latest
 
     defaults:
       run:
-        shell: bash
+        shell            : bash
         working-directory: infrastructure/${{ inputs.domain }}
 
-    env:
+    env     :
       TF_CLOUD_ORGANIZATION: ${{ inputs.terraform-organization }}
-      TF_WORKSPACE: ${{ inputs.terraform-workspace }}
+      TF_WORKSPACE         : ${{ inputs.terraform-workspace }}
 
-    steps:
+    steps   :
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -43,36 +43,36 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
 
       - name: Terraform init
-        run: terraform init
+        run : terraform init
 
       - name: Terraform format
-        run: terraform fmt -check
+        run : terraform fmt -check
 
       - name: Terraform validate
-        run: terraform validate -no-color
+        run : terraform validate -no-color
 
       - name: Run SonarCloud analysis
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          fetch-depth: 0
+          fetch-depth   : 0
           projectBaseDir: infrastructure/${{ inputs.domain }}
-          args: >
+          args          : >
             -Dsonar.organization=ecristobal
             -Dsonar.projectKey=ecristobal_borealis-data-platform-infrastructure-${{ inputs.domain }}
-        env:
+        env :
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN : ${{ secrets.SONAR_TOKEN }}
 
       - name: Snyk analysis
         uses: snyk/actions/iac@master
-        env:
+        env :
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           file: infrastructure/${{ inputs.domain }}/main.tf
 
       - name: Terraform plan
-        run: terraform plan -input=false
+        run : terraform plan -input=false
 
       - name: Terraform apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve -input=false
+        if  : github.ref == 'refs/heads/main'
+        run : terraform apply -auto-approve -input=false
